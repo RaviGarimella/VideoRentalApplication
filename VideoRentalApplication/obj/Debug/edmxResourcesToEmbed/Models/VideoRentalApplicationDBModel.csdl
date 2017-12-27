@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VideoRentalApplicationDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="VideoRentalApplicationDBContext" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Customers" EntityType="VideoRentalApplicationDBModel.Customer" />
+    <EntitySet Name="MembershipTypes" EntityType="VideoRentalApplicationDBModel.MembershipType" />
+    <EntitySet Name="Movies" EntityType="VideoRentalApplicationDBModel.Movie" />
+    <AssociationSet Name="FK__Customers__membe__29572725" Association="VideoRentalApplicationDBModel.FK__Customers__membe__29572725">
+      <End Role="MembershipType" EntitySet="MembershipTypes" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="custID" />
+    </Key>
+    <Property Name="custID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="IsSubscribedToNewsletter" Type="Boolean" />
+    <Property Name="membershipTypeId" Type="Int32" Nullable="false" />
+    <Property Name="BirthDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="MembershipType" Relationship="VideoRentalApplicationDBModel.FK__Customers__membe__29572725" FromRole="Customers" ToRole="MembershipType" />
+  </EntityType>
+  <EntityType Name="MembershipType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="SignUpFee" Type="Int32" />
+    <Property Name="DurationInMonths" Type="Int32" />
+    <Property Name="DiscountRate" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Customers" Relationship="VideoRentalApplicationDBModel.FK__Customers__membe__29572725" FromRole="MembershipType" ToRole="Customers" />
+  </EntityType>
+  <EntityType Name="Movie">
+    <Key>
+      <PropertyRef Name="movieID" />
+    </Key>
+    <Property Name="movieID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="NumberInStock" Type="Int32" />
+    <Property Name="Genre" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="ReleaseDate" Type="DateTime" Precision="0" />
+    <Property Name="DateAdded" Type="DateTime" Precision="0" />
+  </EntityType>
+  <Association Name="FK__Customers__membe__29572725">
+    <End Role="MembershipType" Type="VideoRentalApplicationDBModel.MembershipType" Multiplicity="1" />
+    <End Role="Customers" Type="VideoRentalApplicationDBModel.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MembershipType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="membershipTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

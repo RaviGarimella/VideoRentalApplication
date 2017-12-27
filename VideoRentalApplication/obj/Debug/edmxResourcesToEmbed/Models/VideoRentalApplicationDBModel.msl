@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="VideoRentalApplicationDBModelStoreContainer" CdmEntityContainer="VideoRentalApplicationDBContext">
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="VideoRentalApplicationDBModel.Customer">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="custID" ColumnName="custID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsSubscribedToNewsletter" ColumnName="IsSubscribedToNewsletter" />
+          <ScalarProperty Name="membershipTypeId" ColumnName="membershipTypeId" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MembershipTypes">
+      <EntityTypeMapping TypeName="VideoRentalApplicationDBModel.MembershipType">
+        <MappingFragment StoreEntitySet="MembershipType">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SignUpFee" ColumnName="SignUpFee" />
+          <ScalarProperty Name="DurationInMonths" ColumnName="DurationInMonths" />
+          <ScalarProperty Name="DiscountRate" ColumnName="DiscountRate" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movies">
+      <EntityTypeMapping TypeName="VideoRentalApplicationDBModel.Movie">
+        <MappingFragment StoreEntitySet="Movies">
+          <ScalarProperty Name="movieID" ColumnName="movieID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NumberInStock" ColumnName="NumberInStock" />
+          <ScalarProperty Name="Genre" ColumnName="Genre" />
+          <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,68 @@
+﻿@model VideoRentalApplication.ViewModels.CreateCustomerViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>New Customer</h2>
+
+@using (Html.BeginForm("Create", "Customer"))
+{
+    @Html.ValidationSummary(false, "Please fix the below errors")
+@*<div class="editor-label">
+            @Html.LabelFor(model => model.Customer.custID, "Customer ID")
+            @Html.TextBoxFor(model => model.Customer.custID)
+            @Html.ValidationMessageFor(model => model.Customer.custID,"*")
+        </div>*@
+    
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Customer.Name)
+        @Html.TextBoxFor(model => model.Customer.Name, new { id = "txtcustName" })
+        @Html.ValidationMessageFor(model => model.Customer.Name, "*")
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Customer.BirthDate)
+        @Html.TextBoxFor(model => model.Customer.BirthDate)
+    </div>       
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Customer.IsSubscribedToNewsletter, "Subscribed to Newsletter?")
+        @Html.CheckBoxFor(model => model.Customer.IsSubscribedToNewsletter)
+    </div>        
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.MembershipType, "MemberShip Type")
+        @Html.DropDownListFor(model => model.Customer.membershipTypeId,
+            new SelectList(Model.MembershipType, "ID", "Name"), "Select Plan")
+        @Html.ValidationMessageFor(model => model.Customer.membershipTypeId, "*")
+    </div>        
+
+    @Html.HiddenFor(model => model.Customer.custID)
+    @Html.HiddenFor(model => model.Customer.membershipTypeId)
+    <p>
+        <input id="btnCreate" type="submit" value="Create" />
+    </p>   
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#txtcustName').focus();
+            $('#btnCreate').mouseover(function () {
+                $('#btnCreate').css("background-color", "DarkOrange");
+            })
+            $('#btnCreate').mouseout(function () {
+                $('#btnCreate').css("background-color", "LightGray");
+            });
+        });
+
+        //window.addEventListener('load', function setup() {
+        // $("#txtcustName").focus();
+        //}, false);
+    </script>
+}

@@ -1,0 +1,46 @@
+﻿@model VideoRentalApplication.Models.Customer
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Customer</legend>
+
+    <div class="display-label">
+         @Html.LabelFor(model => model.custID,"Customer ID")
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.custID)
+    </div>
+
+    <div class="display-label">
+         @Html.LabelFor(model => model.Name,"Customer Name")
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.LabelFor(model => model.IsSubscribedToNewsletter,"Subscribed to Newsletter?")
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsSubscribedToNewsletter)
+    </div>
+
+    <div class="display-label">
+         @Html.LabelFor(model => model.MembershipType.Name, "MemberShip Type")
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MembershipType.Name)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

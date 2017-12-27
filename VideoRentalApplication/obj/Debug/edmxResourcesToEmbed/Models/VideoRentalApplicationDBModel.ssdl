@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VideoRentalApplicationDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="VideoRentalApplicationDBModelStoreContainer">
+    <EntitySet Name="Customers" EntityType="VideoRentalApplicationDBModel.Store.Customers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MembershipType" EntityType="VideoRentalApplicationDBModel.Store.MembershipType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Movies" EntityType="VideoRentalApplicationDBModel.Store.Movies" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__Customers__membe__29572725" Association="VideoRentalApplicationDBModel.Store.FK__Customers__membe__29572725">
+      <End Role="MembershipType" EntitySet="MembershipType" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="custID" />
+    </Key>
+    <Property Name="custID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsSubscribedToNewsletter" Type="bit" />
+    <Property Name="membershipTypeId" Type="int" Nullable="false" />
+    <Property Name="BirthDate" Type="date" />
+  </EntityType>
+  <EntityType Name="MembershipType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SignUpFee" Type="int" />
+    <Property Name="DurationInMonths" Type="int" />
+    <Property Name="DiscountRate" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Movies">
+    <Key>
+      <PropertyRef Name="movieID" />
+    </Key>
+    <Property Name="movieID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="NumberInStock" Type="int" />
+    <Property Name="Genre" Type="nvarchar" MaxLength="50" />
+    <Property Name="ReleaseDate" Type="date" />
+    <Property Name="DateAdded" Type="date" />
+  </EntityType>
+  <Association Name="FK__Customers__membe__29572725">
+    <End Role="MembershipType" Type="VideoRentalApplicationDBModel.Store.MembershipType" Multiplicity="1" />
+    <End Role="Customers" Type="VideoRentalApplicationDBModel.Store.Customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MembershipType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="membershipTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

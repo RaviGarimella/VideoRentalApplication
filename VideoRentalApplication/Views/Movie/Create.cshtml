@@ -1,0 +1,89 @@
+﻿@model VideoRentalApplication.Models.Movie
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>New Movie</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(false,"Please fix the below errors")
+
+    <fieldset>
+        <legend>Movie</legend>
+
+        @*<div class="editor-label">
+            @Html.LabelFor(model => model.movieID, "Movie ID")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.movieID)
+            @Html.ValidationMessageFor(model => model.movieID,"*")
+        </div>*@
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name,"*")
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NumberInStock, "Number In Stock")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NumberInStock)
+            @Html.ValidationMessageFor(model => model.NumberInStock,"*")
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Genre)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Genre)
+            @Html.ValidationMessageFor(model => model.Genre,"*")
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ReleaseDate, "Release Date")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ReleaseDate)
+            @Html.ValidationMessageFor(model => model.ReleaseDate)
+        </div>
+
+        @*<div class="editor-label">
+            @Html.LabelFor(model => model.DateAdded)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DateAdded)
+            @Html.ValidationMessageFor(model => model.DateAdded)
+        </div>*@        
+        @Html.HiddenFor(model => model.movieID)
+        <p>
+            <input id="btnmovieCreate" type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#Name').focus();
+            $('#btnmovieCreate').mouseover(function () {
+                $('#btnmovieCreate').css("background-color", "DarkOrange");
+            })
+            $('#btnmovieCreate').mouseout(function () {
+                $('#btnmovieCreate').css("background-color", "LightGray");
+            });
+        });
+
+        //window.addEventListener('load', function setup() {
+        // $("#txtcustName").focus();
+        //}, false);
+    </script>
+}

@@ -1,0 +1,101 @@
+﻿@model IEnumerable<VideoRentalApplication.Models.Movie>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Movies</h2>
+
+@using (Html.BeginForm())
+{ 
+    <input id="btnNewMovie" type="button" value="New Movie" 
+     onclick="@("window.location.href='" + @Url.Action("Create", "Movie") + "'")    ;"/>
+}
+
+
+<table id="movies" class="table table-bordered table-hover" style="width: 100%; margin-top: 6px;">
+    <thead>
+        <tr style="background-color: #DF7401; color: white;">
+            <th style="text-align: center;">
+                <h3>Movie</h3>
+            </th>
+            <th style="text-align: center;">
+                <h3>Genre</h3>
+            </th>
+            <th style="text-align: center;">
+                <h3>Delete</h3>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @*@foreach (var item in Model)
+        {
+            <tr>
+                <td style="padding-left: 5px;">
+                    @Html.ActionLink(item.Name, "Edit", "Movie", new { movieID = item.movieID }, null)
+                </td>
+                <td style="padding-left: 5px;">
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td style="padding-left: 5px;">
+                    <button type="button" data-customer-id="@item.movieID" class="btnMovieDelete" value="Delete">Delete</button>
+                </td>
+            </tr>
+        }*@
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $("#movies").DataTable({
+                ajax: {
+                   url: "/api/movies",
+                   dataSrc: ""
+                      },
+                columns: [
+                    {
+                        data: "Name",
+                        render: function (data, type, movie) {
+                            return "<a href='/Movie/Edit/?movieID=" + movie.movieID + "'>" + movie.Name + "</a>";
+                        }
+                    },
+                    {
+                        data: "Genre"                        
+                    },
+                    {
+                        data: "movieID",
+                        render: function (data) {
+                            return "<button class='btnMovieDelete' data-movie-id= " + data + ">Delete</button>";
+                        }
+                    }
+                ],
+                "scrollY": 200,
+                "scrollX": true
+            });
+
+            $("#movies").on("click", ".btnMovieDelete", function () {
+                var btn = $(this);
+                bootbox.confirm("Do you want to delete the movie?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            Url: "/api/movies" + btn.attr("data-movie-id"),
+                            Method: "DELETE",
+                            success: function () {
+                                table.row(btn.parents("tr")).remove().draw();                                
+                            }
+                        });
+                    }
+                });
+            });
+
+            $("#btnNewMovie").mouseover(function () {
+                $(this).css("background-color", "DarkOrange");
+            });
+            $("#btnNewMovie").mouseout(function () {
+                $(this).css("background-color", "LightGray");
+            });
+        });
+    </script>
+}

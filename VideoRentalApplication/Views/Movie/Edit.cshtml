@@ -1,0 +1,67 @@
+﻿@model VideoRentalApplication.Models.Movie
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Movie</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(false,"Please fix the below errors")
+
+    <fieldset>
+        <legend>Movie</legend>
+
+        @Html.HiddenFor(model => model.movieID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name,"*")
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NumberInStock, "Number In Stock")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NumberInStock)
+            @Html.ValidationMessageFor(model => model.NumberInStock,"*")
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Genre)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Genre)
+            @Html.ValidationMessageFor(model => model.Genre,"*")
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ReleaseDate,"Release Date")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ReleaseDate)
+            @Html.ValidationMessageFor(model => model.ReleaseDate,"*")
+        </div>
+
+        @*<div class="editor-label">
+            @Html.LabelFor(model => model.DateAdded, "Date Added")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DateAdded)
+            @Html.ValidationMessageFor(model => model.DateAdded)
+        </div>*@
+        
+        @Html.AntiForgeryToken()
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
