@@ -6,6 +6,21 @@
 
 <h2>Customers</h2>
 
+@Ajax.ActionLink("Top 3", "Top3", 
+    new AjaxOptions 
+    {
+      HttpMethod = "GET", // HttpMethod to use, GET or POST
+      UpdateTargetId = "customers", // ID of the HTML element to update
+      InsertionMode = InsertionMode.Replace // Replace the existing contents
+    })
+@Ajax.ActionLink("Bottom 3", "Bottom3", 
+    new AjaxOptions 
+    {
+      HttpMethod = "GET", // HttpMethod to use, GET or POST
+      UpdateTargetId = "customers", // ID of the HTML element to update
+      InsertionMode = InsertionMode.Replace // Replace the existing contents
+    })
+
 @using (Html.BeginForm())
 { 
  <input id="btnNewCustomer" type="button" value="New Customer" 

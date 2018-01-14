@@ -22,6 +22,16 @@ namespace VideoRentalApplication.Controllers
             //var customers = db.Customers.Include(c => c.MembershipType);customers.ToList()
             return View();
         }
+        public PartialViewResult Top3()  // Implementing Ajax
+        {
+            List<Customer> customers = db.Customers.OrderByDescending(x => x.Name).Take(3).ToList();
+            return PartialView("_Customer", customers);
+        }
+        public PartialViewResult Bottom3()
+        {
+            List<Customer> customers = db.Customers.OrderBy(x => x.Name).Take(3).ToList();
+            return PartialView("_Customer", customers);
+        }
 
         //
         // GET: /Customer/Details/5

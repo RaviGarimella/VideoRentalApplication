@@ -1,0 +1,40 @@
+﻿@model IEnumerable<VideoRentalApplication.Models.Customer>
+
+@Styles.Render("~/Content/bootstrapcss")
+    @Styles.Render("~/Content/themes/base/css")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+<script src="~/Scripts/jquery-1.9.1.js"></script>
+<script src="~/Scripts/jquery-1.9.1.min.js"></script>
+
+<table>
+    <tr>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        
+        
+        <th>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </th>
+        
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthDate)
+        </td>
+       
+    </tr>
+}
+
+</table>
+
