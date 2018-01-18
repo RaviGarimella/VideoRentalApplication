@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "IssueTracker";
+}
+<body onload="fetchIssues()">    
+        <h1>Issue Tracker</h1>
+
+        <h2>Add New Issue</h2>
+
+        <form id="issueForm">
+        <label>Description</label>
+        @Html.TextBox("Description", "", new { @id = "txtdesc" })
+
+        <label>Severity</label>
+        @Html.DropDownList("Severity", new List<SelectListItem>{
+            new SelectListItem { Text = "Low", Value = "Low" },
+            new SelectListItem { Text = "Medium", Value = "Medium" },
+            new SelectListItem { Text = "High", Value = "High" }
+            }, "Select", new { @id = "ddlseverity" })
+
+        <label>Assigned To</label>
+        @Html.TextBox("Assigned To", "", new { @id = "txtassigned" })
+       </form>
+        <p>
+            <input id="btnAdd" type="submit" value="Add" />
+        </p>   
+
+    <div id="issuelist"></div>
+</body>
+@section scripts{
+    <script type="text/javascript" src="http://chancejs.com/chance.min.js"></script>
+    <script type="text/javascript">
+        try
+        {
+            $(document).ready(function () {
+                $('#btnAdd').on("click", saveIssue())
+            });
+            function saveIssue(e) {
+                var issueDescription = $("#txtdesc").val();
+                var issueSeverity = $("#ddlseverity").val();
+                var issueAssigned = $("#txtassigned").val();
+                var issueID = chance.guid();
+                var issueStatus = "Open";
+                var issue = {
+                    id: issueID,
+                    description: issueDescription,
+                    severity: issueSeverity,
+                    assigned: issueAssigned,
+                    status: issueStatus
+                }
+                if (localStorage.getItem('issues') == null) {
+                    var issues = [];
+                    issues.push(issue);
+                    localStorage.setItem('issues', JSON.stringify(issues));
+                } else {
+                    var issues = JSON.parse(localStorage.getItem('issues'));
+                    issues.push(issue);
+                    localStorage.setItem('issues', JSON.stringify(issues));
+                }
+                //$('issueForm').reset();
+
+                fetchIssues();
+
+                //e.preventDefault();
+            }
+            function fetchIssues() {
+                var issues = JSON.parse(localStorage.getItem('issues'));
+                var issuelist = document.getElementById('issuelist');
+
+                issuelist.innerHTML = "";
+                for (var i = 0; i < issues.length; i++) {
+                    var id = issues[i].id;
+                    var description = issues[i].description;
+                    var severity = issues[i].severity;
+                    var assigned = issues[i].assigned;
+                    var status = issues[i].status;
+
+                    issuelist.innerHTML += '<div class="well">' +
+                                           '<h6>Issue ID: ' + id + '</h6>' +
+                                           '<p><span class="label label-info">' + status + '</span></p>' +
+                                           '<h3>' + description + '</h3>' +
+                                           '<p><span class="glyphicon glyphicon-time"></span> ' + severity + '</p>' +
+                                           '<p><span class="glyphicon glyphicon-user"></span> ' + assigned + '</p>' +
+                                           '<a href="#" onclick="setStatusClosed(\'' + id + '\')" class="btn btn-warning">Close</a> ' +
+                                           '<a href="#" onclick="deleteIssue(\'' + id + '\')" class="btn btn-danger">Delete</a>' +
+                                           '</div>';
+                }
+            }
+        }
+        catch (e)
+        {
+            document.getElementById("#issuelist").innerHTML = e.message;
+        }
+    </script>
+}

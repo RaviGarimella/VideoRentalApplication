@@ -29,5 +29,22 @@ namespace VideoRentalApplication.Controllers
 
             return View();
         }
+        public ActionResult GetLocation()
+        {
+            //ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+        public ActionResult IssueTracker()
+        {
+                       
+            /*ViewBag.Severity = new List<SelectListItem>{
+            new SelectListItem { Text = "Low", Value = "Low" },
+            new SelectListItem { Text = "Medium", Value = "Medium" },
+            new SelectListItem { Text = "High", Value = "High" }
+            }; */
+
+            return View();            
+        }
     }
 }

@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "GetLocation";    
+}
+
+<h1>Headquarters Location</h1>
+<div id='map'></div>
+@section scripts
+    {
+    @Scripts.Render("~/bundles/googleapi")
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCR5_Vfh69F4pOZi4Sqd4nfqtR91viuJlY&callback=initMap">
+    </script>
+}

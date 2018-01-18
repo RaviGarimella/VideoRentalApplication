@@ -18,6 +18,9 @@ namespace VideoRentalApplication
                         "~/Scripts/datatables/jquery.datatables.js",
                         "~/Scripts/datatables/datatables.bootstrap.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/googleapi").Include(   // JS files for Google API
+                       "~/Scripts/JavaScript.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
 
