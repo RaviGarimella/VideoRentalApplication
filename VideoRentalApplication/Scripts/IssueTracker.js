@@ -1,7 +1,8 @@
 ﻿try {
-    $(document).ready(function () {
-        $('#btnAdd').on("click", saveIssue(event))
-    });
+    document.getElementById('issueForm').addEventListener('submit', saveIssue);
+    //$(document).ready(function () {
+        //$('#btnAdd').on("click", saveIssue(event))
+    //});
     function saveIssue(e) {
         var issueDescription = $("#txtdesc").val();
         var issueSeverity = $("#ddlseverity").val();
